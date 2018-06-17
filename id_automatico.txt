@@ -1,0 +1,66 @@
+data_zoho=zoho.currentdate;
+mes_zoho=data_zoho.getMonth();
+ano_zoho=data_zoho.getYear();
+
+//tratamento do mês (inclusão do 0 antes do número caso seja menor que 10)
+if(mes_zoho  <  10)
+{
+	mes_formatado=0 + toString(mes_zoho);
+}
+
+//Tratamento do ano ano_formatado -> ano_format, com apenas o final do ano
+ano_formatado=(ano_zoho  -  2000);
+ano_format=toString(ano_formatado);
+
+//Inicia o prefixo
+prefixo=ano_format + mes_formatado;
+
+//Pega data do dia anterior
+dia_anterior=zoho.currentdate.subDay(1);
+
+//Pega todos os Orçamentos
+todos_orcamentos = zoho.crm.getRecords("Quotes");
+
+//Pega o id anterior
+orcamento_anterior = todos_orcamentos.get(0);
+identificador_anterior = orcamento_anterior.get("Sequencial");
+numero_anterior = identificador_anterior.subString(4,9);
+id_anterior = Tolong(numero_anterior);
+
+//Define o número central de acordo com a quantidade de Or�amentos registrados
+//e com a quantidade de caracteres do próprio número central
+central_num=1;
+
+//Caso seja o primeiro dia do ano, a numeração central volta a ser 00001
+dia_atual=data_zoho.getDay();
+
+//
+if(dia_atual  =  1)
+{
+	central_num=1;
+}
+else
+{
+	central_num = id_anterior + 1;
+}
+
+central=toString(central_num);
+
+if(central.length()  <  5)
+{
+	central=(toString(0)) + central;
+}
+if(central.length()  <  5)
+{
+	central=(toString(0)) + central;
+}
+if(central.length()  <  5)
+{
+	central=(toString(0)) + central;
+}
+if(central.length()  <  5)
+{
+	central=(toString(0)) + central;
+}
+
+id_final = prefixo + central;
