@@ -1,4 +1,4 @@
-/* Token geRado via Zoho API */
+/* Token gerado via Zoho API */
 authtoken = "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX";	     
 produto = zoho.crm.getRecordById("Products",product_id);
 string_xml = "";
